@@ -30,8 +30,14 @@ deconstruct（随时拆概念）
 ## 安装
 
 ```bash
-# 安装 / 更新（同一条命令）
-cd ~/.claude/skills && git clone https://github.com/dontbesilent2025/dbskill.git /tmp/dbskill && cp -r /tmp/dbskill/dbs* . && rm -rf /tmp/dbskill
+# 推荐：一行安装
+npx skills add dontbesilent2025/dbskill
+```
+
+或手动安装：
+
+```bash
+git clone https://github.com/dontbesilent2025/dbskill.git /tmp/dbskill && cp -r /tmp/dbskill/skills/dbs* ~/.claude/skills/ && rm -rf /tmp/dbskill
 ```
 
 ## 使用方式
