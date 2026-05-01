@@ -1,8 +1,10 @@
 # dbskill
 
-dontbesilent 商业诊断工具箱。从 12,307 条推文中提炼方法论，做成 13 个 Claude Code skill。
+dontbesilent 商业诊断工具箱。从 12,307 条推文中提炼方法论，做成 16 个 Claude Code skill。
 
-**最新更新：v2.6.7**
+**最新更新：v2.7.0**
+
+**v2.7.0 新增**：诊断状态管理三件套（`/dbs-save`、`/dbs-restore`、`/dbs-report`）。诊断不再是单次问诊——这次诊断结束之前 `/dbs-save` 存一份，下次重开对话 `/dbs-restore` 接着走，攒够几次再用 `/dbs-report` 合并成一份可交付的报告。
 
 **作者**：[X](https://x.com/dontbesilent) · [小红书](https://xhslink.com/m/637xuspR4iI) · [抖音](https://v.douyin.com/pRUDhpBqOrc/)
 
@@ -64,6 +66,21 @@ npx skills add dontbesilent2025/dbskill
 | `/dbs-action` | 执行力诊断。阿德勒框架（原 dbs-unblock） |
 | `/dbs-deconstruct` | 概念拆解。维特根斯坦式审查 |
 
+### 状态管理三件套
+
+| Skill          | 做什么                                          |
+| -------------- | -------------------------------------------- |
+| `/dbs-save`    | 把当前诊断的关键结论、否决方向、推荐下一步存到本地。每次新增不覆盖            |
+| `/dbs-restore` | 拉出上次的存档，下次开新对话也能接着诊断              |
+| `/dbs-report`  | 把多次存档合并成一份带时间索引的 markdown 报告。可分享、可归档 |
+
+> **几个关键词**
+> - **存档**：`/dbs-save` 写到本地的一份诊断状态文件。每次 save 都新增一份，不会覆盖。一个项目下可以攒很多份存档，记录诊断从开始到收尾的全过程。
+> - **项目**：用来分隔不同生意的诊断。默认按你当前的目录名隔离——给小红书做的诊断和给线下课做的诊断不会混在一起。
+> - **接着上次**：你今天关掉 Claude Code，明天重开。只要还在同一个项目目录里 `/dbs-restore`，就会自动把上次的存档拉回来。
+
+诊断的存档默认放在 `~/.dbs/sessions/{项目名}/`，报告放在 `~/.dbs/reports/{项目名}/`。
+
 ### Agent 基建
 
 | Skill | 做什么 |
@@ -106,6 +123,20 @@ deconstruct（概念模糊，导致判断不成立）
 chatroom（想先听多个视角，再决定下一步）
 ```
 
+#### 状态管理（贯穿所有诊断）
+
+```text
+任何诊断 skill 走完有结论
+    ↓
+save（把结论、否决方向、下一步存档到本地）
+    ↓
+下次回来 → restore（把上次的存档拉回来，接着走）
+    ↓
+攒了多份存档 → report（合并出可分享的报告）
+```
+
+诊断走到「问题被消解」「报告输出」「行动方案确定」这类节点时，相关 skill 会主动建议你 `/dbs-save`。后面回来时一句「接着上次」或 `/dbs-restore` 就能继续，不用从头再讲一遍背景。
+
 Skill 之间会自动推荐下一步。比如：
 - diagnosis 发现方向成立但缺具体路径 → 推荐 benchmark
 - diagnosis 发现核心卡点是心理或执行 → 推荐 action
@@ -122,6 +153,9 @@ Skill 之间会自动推荐下一步。比如：
 - 任何阶段如果用户想先听不同视角 → 推荐 chatroom
 - 任何阶段如果用户用了模糊概念 → 推荐 deconstruct
 - 用户明确提到 Claude Code、Codex、`AGENTS.md`、`CLAUDE.md`、skill bridge、工作台迁移、双端统一，或说“我的 Agent 工作台很乱”“帮我统一 Claude 和 Codex” → 推荐 `dbs-agent-migration`
+- diagnosis / benchmark / content / action / deconstruct 走到有结论的节点 → 推荐 `dbs-save`
+- 用户说「上次」「之前的」「接着」「续上」 → 推荐 `dbs-restore`
+- save 累积 ≥3 份存档或用户说「打包」「整理一份」「给合伙人看的」 → 推荐 `dbs-report`
 
 ---
 

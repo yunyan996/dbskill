@@ -4,8 +4,8 @@
     "name": "dontbesilent2025"
   },
   "metadata": {
-    "description": "dontbesilent 商业诊断工具箱 — 从 12,307 条推文中提炼方法论，做成 13 个 Claude Code skill",
-    "version": "2.6.7"
+    "description": "dontbesilent 商业诊断工具箱 — 从 12,307 条推文中提炼方法论，做成 16 个 Claude Code skill",
+    "version": "2.7.0"
   },
   "plugins": [
     {
@@ -137,6 +137,36 @@
       "category": "workflow-infrastructure",
       "keywords": ["agent", "migration", "codex", "claude-code", "agents-md", "bridge", "chinese"],
       "skills": ["./skills/dbs-agent-migration"]
+    },
+    {
+      "name": "dbs-save",
+      "description": "把当前诊断的关键状态存到本地，下次回来可以接着用。诊断从单次问诊升级为可累积的状态。",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "state-management",
+      "keywords": ["save", "checkpoint", "snapshot", "state", "persistence", "chinese"],
+      "skills": ["./skills/dbs-save"]
+    },
+    {
+      "name": "dbs-restore",
+      "description": "把上次诊断的状态拉出来，接着用。配合 dbs-save，跨对话接续诊断。",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "state-management",
+      "keywords": ["restore", "recall", "continue", "session", "chinese"],
+      "skills": ["./skills/dbs-restore"]
+    },
+    {
+      "name": "dbs-report",
+      "description": "把多次 dbs-save 攒下来的诊断状态合并成一份可交付的 markdown 报告，可分享、可归档。",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "state-management",
+      "keywords": ["report", "deliverable", "merge", "markdown", "chinese"],
+      "skills": ["./skills/dbs-report"]
     }
   ]
 }
