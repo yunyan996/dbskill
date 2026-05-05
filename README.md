@@ -1,8 +1,10 @@
 # dbskill
 
-dontbesilent 商业诊断工具箱。从 12,307 条推文中提炼方法论，做成 16 个 Claude Code skill。
+dontbesilent 商业诊断工具箱。从 12,307 条推文中提炼方法论，做成 17 个 Claude Code skill。
 
-**最新更新：v2.7.0**
+**最新更新：v2.8.0**
+
+**v2.8.0 新增**：目标清晰化（`/dbs-goal`）。帮你把「我想做个人 IP」「我想变得更好」「我想做真正有影响力的内容」这类愿望语法，用维特根斯坦的语言哲学审计成可检查的交付物——三个用法测试 + 空转词识别 + 重写为可指物目标。在 diagnosis 之后、action 之前的一道关。
 
 **v2.7.0 新增**：诊断状态管理三件套（`/dbs-save`、`/dbs-restore`、`/dbs-report`）。诊断不再是单次问诊——这次诊断结束之前 `/dbs-save` 存一份，下次重开对话 `/dbs-restore` 接着走，攒够几次再用 `/dbs-report` 合并成一份可交付的报告。
 
@@ -65,6 +67,7 @@ npx skills add dontbesilent2025/dbskill
 | `/dbs-slowisfast` | 慢就是快。摩擦建造资产，找到值得慢做的环节 |
 | `/dbs-action` | 执行力诊断。阿德勒框架（原 dbs-unblock） |
 | `/dbs-deconstruct` | 概念拆解。维特根斯坦式审查 |
+| `/dbs-goal` | 目标清晰化。把模糊目标审计成可检查的交付物 |
 
 ### 状态管理三件套
 
@@ -117,6 +120,7 @@ content 想检查 AI 味 → ai-check（AI 写作检测）
 #### 横向工具
 
 ```text
+goal（目标本身是空转的，无法驱动行动）
 slowisfast（任何关键决策阶段：当你在走捷径、贪快、绕开关键摩擦时）
 action（知道该做什么，但就是做不动）
 deconstruct（概念模糊，导致判断不成立）
@@ -142,18 +146,26 @@ Skill 之间会自动推荐下一步。比如：
 - diagnosis 发现核心卡点是心理或执行 → 推荐 action
 - diagnosis 发现用户在关键决策上走捷径 → 推荐 slowisfast
 - diagnosis 发现问题里的概念没定义清楚 → 推荐 deconstruct
+- diagnosis 发现用户的"问题"其实是个空转目标，原话本身就不能驱动行动 → 推荐 goal
 - benchmark 找到对标后，进入具体表达和内容执行 → 推荐 content
 - benchmark 发现用户在模仿路径上贪快 → 推荐 slowisfast
 - benchmark 发现逃避执行 → 推荐 action
+- benchmark 发现用户的目标本身就是模糊的，找不到该模仿谁 → 推荐 goal
 - content 发现开头问题 → 推荐 hook
 - content 需要起标题 → 推荐 xhs-title
 - content 检测出 AI 味 → 推荐 ai-check
 - content 发现内容方法上在走捷径 → 推荐 slowisfast
 - action 发现不是执行力问题，而是方法选错了 → 推荐 slowisfast
+- action 发现用户做不动是因为目标本身就是空转的 → 推荐 goal
+- deconstruct 拆完概念后发现整句话是空转目标 → 推荐 goal
+- goal 审计通过但用户做不动 → 推荐 action
+- goal 审计通过但缺路径 → 推荐 benchmark
+- goal 审计通过但牵涉具体内容创作 → 推荐 content / hook / xhs-title
+- goal 审计中发现某个词是伪概念 → 推荐 deconstruct
 - 任何阶段如果用户想先听不同视角 → 推荐 chatroom
 - 任何阶段如果用户用了模糊概念 → 推荐 deconstruct
 - 用户明确提到 Claude Code、Codex、`AGENTS.md`、`CLAUDE.md`、skill bridge、工作台迁移、双端统一，或说“我的 Agent 工作台很乱”“帮我统一 Claude 和 Codex” → 推荐 `dbs-agent-migration`
-- diagnosis / benchmark / content / action / deconstruct 走到有结论的节点 → 推荐 `dbs-save`
+- diagnosis / benchmark / content / action / deconstruct / goal 走到有结论的节点 → 推荐 `dbs-save`
 - 用户说「上次」「之前的」「接着」「续上」 → 推荐 `dbs-restore`
 - save 累积 ≥3 份存档或用户说「打包」「整理一份」「给合伙人看的」 → 推荐 `dbs-report`
 

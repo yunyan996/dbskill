@@ -4,8 +4,8 @@
     "name": "dontbesilent2025"
   },
   "metadata": {
-    "description": "dontbesilent 商业诊断工具箱 — 从 12,307 条推文中提炼方法论，做成 16 个 Claude Code skill",
-    "version": "2.7.0"
+    "description": "dontbesilent 商业诊断工具箱 — 从 12,307 条推文中提炼方法论，做成 17 个 Claude Code skill",
+    "version": "2.8.0"
   },
   "plugins": [
     {
@@ -167,6 +167,16 @@
       "category": "state-management",
       "keywords": ["report", "deliverable", "merge", "markdown", "chinese"],
       "skills": ["./skills/dbs-report"]
+    },
+    {
+      "name": "dbs-goal",
+      "description": "dontbesilent 目标清晰化。用维特根斯坦方法把模糊目标审计成可检查的交付物。",
+      "source": "./",
+      "strict": false,
+      "version": "1.0.0",
+      "category": "business-diagnostics",
+      "keywords": ["goal", "clarity", "wittgenstein", "language-game", "chinese"],
+      "skills": ["./skills/dbs-goal"]
     }
   ]
 }
