@@ -1,6 +1,8 @@
 # dbskill
 
-dontbesilent 商业诊断工具箱。从 12,307 条推文中提炼方法论，做成 17 个 Claude Code skill。
+dontbesilent 商业诊断工具箱。从 12,307 条推文中提炼方法论，做成 17 个 Agent skill。
+
+可在 Claude Code、Codex、Cursor、Trae、Manus 等任意支持 skill / system prompt 的 Agent 上使用。
 
 **最新更新：v2.8.0**
 
