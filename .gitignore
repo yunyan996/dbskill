@@ -8,6 +8,7 @@ skills 版本管理/
 AGENTS.md
 CLAUDE.md
 SOURCE_OF_TRUTH.md
+dist/
 
 # 知识库：只发 Skill 需要的部分
 知识库/legacy/
