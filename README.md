@@ -35,7 +35,7 @@ npx skills add dontbesilent2025/dbskill
 
 #### Trae Solo
 
-Trae Solo 支持上传包含根级 `SKILL.md` 的 zip 或 `.skill` 文件。从 [GitHub Releases](https://github.com/dontbesilent2025/dbskill/releases) 下载最新的 `dbskill-版本号.zip`，解压后里面是 17 个 `.skill` 文件，逐个拖进 Trae Solo 的「上传技能」窗口即可。
+Trae Solo 支持上传包含根级 `SKILL.md` 的 zip。从 [GitHub Releases](https://github.com/dontbesilent2025/dbskill/releases) 下载最新的 `dbskill-版本号.zip`，里面是 17 个 skill 子文件夹（每个子文件夹里有标准的 `SKILL.md` + 知识库文件），整体上传到 Trae Solo 即可。
 
 如果想本地构建，运行 `bash tools/build-skills.sh`，产物在 `dist/skills/`。
 
