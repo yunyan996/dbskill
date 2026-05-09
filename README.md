@@ -2,7 +2,7 @@
 
 dontbesilent 商业诊断工具箱。从 12,307 条推文中提炼方法论，做成 17 个 Agent skill。
 
-可在 Claude Code、Codex、Cursor、Trae、Manus 等任意支持 skill / system prompt 的 Agent 上使用。
+可在 Claude Code、Codex、Cursor、Trae Solo 等任意支持 skill / system prompt 的 Agent 上使用。
 
 **最新更新：v2.8.0**
 
@@ -32,6 +32,12 @@ claude plugin install dbs@dontbesilent-skills
 ```bash
 npx skills add dontbesilent2025/dbskill
 ```
+
+#### Trae Solo
+
+Trae Solo 一个 zip 装一个 skill。从 [GitHub Releases](https://github.com/dontbesilent2025/dbskill/releases) 下载最新的 `dbskill-版本号.zip`，解压后里面是 17 个独立的 skill zip（每个 zip 解压后根级是 `SKILL.md`），逐个拖进 Trae Solo 的「上传技能」窗口即可。
+
+如果想本地构建，运行 `bash tools/build-skills.sh`，产物在 `dist/skills/`。
 
 ## 如何更新 dbskill
 
